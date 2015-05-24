@@ -44,7 +44,7 @@ SRC-OBJ-DOT=$(foreach obj,$(SRC-OBJ),.$(obj))
 CFLAGS=-Wall
 IPATH=-I/usr/local/include `pkg-config --cflags eigen3`
 LPATH=-L/usr/local/lib
-LLIBS=-lgsl -lgslcblas -lm
+LLIBS=-lm
 CC=clang++
 
 # # archiving shit
