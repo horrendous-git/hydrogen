@@ -38,6 +38,12 @@ void Graph::set_num_vertices(string line)
 	istringstream iss(line);
 	iss >> num_vertices;
 }
+
+int Graph::at(int row, int col)
+{
+	return mat(row, col);
+}
+
 void Graph::read_adj_list(ifstream file)
 {
 	

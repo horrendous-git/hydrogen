@@ -13,7 +13,7 @@ PROG-DIR=$(BANG-DIR)/hydrogen
 ###################       SRC       ###################
 #######################################################
 #SRC=descriptors descriptor folders interest_regions interest_region parameters component components descfile
-SRC=graph
+SRC=graph certificate partition block
 SRC-CC=$(foreach src,$(SRC), $(src).cc)
 SRC-HH =$(foreach src,$(SRC-CC),$(src:.cc=.hh))
 SRC-OBJ=$(foreach src,$(SRC-CC),$(src:.cc=.o))
@@ -41,7 +41,7 @@ SRC-OBJ-DOT=$(foreach obj,$(SRC-OBJ),.$(obj))
 #IPATH=-Iutils `pkg-config opencv --cflags` -I /usr/include/boost
 #LPATH=-lboost_system -lboost_filesystem `pkg-config opencv --libs`
 
-CFLAGS=-Wall
+CFLAGS=-Wall -Wc++11-extensions
 IPATH=-I/usr/local/include `pkg-config --cflags eigen3`
 LPATH=-L/usr/local/lib
 LLIBS=-lm
@@ -54,7 +54,7 @@ CC=clang++
 #######################################################
 ###################  COMPILE,BUILD  ###################
 #######################################################
-COMPILE=-c $(IPATH)
+COMPILE=-g -c $(IPATH) $(CFLAGS)
 COMPILE_FILE = $(CC) $(COMPILE) $(basename $(1)).cc -o .$(basename $(notdir $(1))).o
 BUILD=$(CC) $(LPATH) $(LLIBS) -o $(NAME)
 
@@ -79,6 +79,17 @@ init:
 
 .graph.o: graph.cc graph.hh
 	$(call COMPILE_FILE,$<)
+
+.certificate.o: certificate.cc certificate.hh
+	$(call COMPILE_FILE,$<)
+
+.partition.o: partition.cc partition.hh
+	$(call COMPILE_FILE,$<)
+
+.block.o: block.cc block.hh
+	$(call COMPILE_FILE,$<)
+
+
 
 # playground: playground.cpp
 # 	$(CPP) playground.cpp $(IPATH) $(LPATH) -o playground
