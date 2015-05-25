@@ -89,44 +89,6 @@ init:
 .block.o: block.cc block.hh
 	$(call COMPILE_FILE,$<)
 
-
-
-# playground: playground.cpp
-# 	$(CPP) playground.cpp $(IPATH) $(LPATH) -o playground
-
-# .eval_helper_2.o: eval_helper_2.cpp $(SRC-OBJS-DOT) $(UTILS-OBJS-DOT)
-# 	$(call COMPILE_FILE,$<)
-
-# .$(NAME).o: $(NAME).cc $(NAME).hh
-# 	$(call COMPILE_FILE,$<)
-
-# .parameters.o: parameters.cpp parameters.hh
-# 	$(call COMPILE_FILE,$<)
-
-# .descriptor.o: descriptor.cpp descriptor.hh
-# 	$(call COMPILE_FILE,$<)
-
-# .descriptors.o: descriptors.cpp descriptors.hh
-# 	$(call COMPILE_FILE,$<)
-
-# .folders.o: folders.cpp folders.hh
-# 	$(call COMPILE_FILE,$<)
-
-# .interest_region.o: interest_region.cpp interest_region.hh
-# 	$(call COMPILE_FILE,$<)
-
-# .interest_regions.o: interest_regions.cpp interest_regions.hh
-# 	$(call COMPILE_FILE,$<)
-
-# .components.o: components.cpp components.hh
-# 	$(call COMPILE_FILE,$<)
-
-# .component.o: component.cpp component.hh
-# 	$(call COMPILE_FILE,$<)
-
-# .descfile.o: descfile.cpp descfile.hh
-# 	$(call COMPILE_FILE,$<)
-
 # .$(notdir $(UTILS_GEN:.cpp=.o)): $(UTILS_GEN) $(UTILS_GEN:.cpp=.hh)
 # 	$(call COMPILE_FILE,$<)
 
