@@ -68,10 +68,12 @@ void Partition::shift(int j, int m)
 
 void Partition::print()
 {
-	cout << size() << endl;
+	cout << "partition[" << size() << "] - [ ";
 	for(auto it=blocks.begin(); it != blocks.end(); it++) {
 		(*it)->print();
+		cout << " ";
 	}
+	cout << "]" << endl;
 }
 
 bool Partition::valid(int j)

@@ -26,13 +26,13 @@ int Block1::intersect(Graph* graph, int vertex)
 {
 	int intersections = 0;
 	int n = graph->num_vertices;
-	for(auto it=elements.begin();
-		it != elements.end(); it++)
+	for(auto element_block=elements.begin(); element_block != elements.end(); element_block++)
+	// for(const auto& element_block : elements)
 	{
 		for(int ix=0; ix<n; ix++) {
-			if(graph->at(vertex,ix)==0)
-				continue;
-			if(ix == *it)
+			if((graph->at(vertex,ix)!=0) && // if ix is adjacent to
+											// vertex, N_G(vertex)
+			   (ix == *element_block))
 				intersections++;
 		}
 	}
@@ -45,7 +45,7 @@ void Block1::print()
 	for(auto it=elements.begin(); it != elements.end(); it++) {
 		cout << *it << " ";
 	}
-	cout << " }" << endl;
+	cout << "}";
 }
 
 void Block1::assign_by_copy(Block1 *block)

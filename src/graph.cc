@@ -31,7 +31,7 @@ Graph::Graph(string filename)
 		ix_row++;
 	}
 	// todo: end
-	cout << mat << endl;
+	// cout << mat << endl;
 }
 void Graph::set_num_vertices(string line)
 {
@@ -39,6 +39,7 @@ void Graph::set_num_vertices(string line)
 	iss >> num_vertices;
 }
 
+// returns the adj matrix value at (row, col)
 int Graph::at(int row, int col)
 {
 	return mat(row, col);

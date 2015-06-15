@@ -4,8 +4,7 @@ NAME=hydrogen
 #######################################################
 ###################   DIRECTORIES   ###################
 #######################################################
-BANG-DIR=~/neo-human/programs/vanity-fair
-PROG-DIR=$(BANG-DIR)/hydrogen
+PROG-DIR=~/neo-human/programs/vanity-fair/hydrogen/src
 #UTILS-DIR=$(PROG-DIR)/utils
 #MATLABROOT=`sh getMatlabRootDir.sh`
 
@@ -41,10 +40,12 @@ SRC-OBJ-DOT=$(foreach obj,$(SRC-OBJ),.$(obj))
 #IPATH=-Iutils `pkg-config opencv --cflags` -I /usr/include/boost
 #LPATH=-lboost_system -lboost_filesystem `pkg-config opencv --libs`
 
-CFLAGS=-Wall -Wc++11-extensions
+# CFLAGS=-Wall -std=c++11
+CFLAGS=-Wall -Wno-c++11-extensions
 IPATH=-I/usr/local/include `pkg-config --cflags eigen3`
 LPATH=-L/usr/local/lib
 LLIBS=-lm
+# CC=g++
 CC=clang++
 
 # # archiving shit
@@ -72,28 +73,10 @@ tags: $(SRC-CPP) $(SRC-HH)
 test: .test.o $(SRC-OBJ-DOT)
 	$(CC) $(LPATH) $(LLIBS) $(SRC-OBJ-DOT) .test.o -o test
 
-.test.o: test.cc
-	$(call COMPILE_FILE,$<)
-
 init:
 
-.graph.o: graph.cc graph.hh
+.%.o: src/%.cc src/%.hh
 	$(call COMPILE_FILE,$<)
-
-.certificate.o: certificate.cc certificate.hh
-	$(call COMPILE_FILE,$<)
-
-.partition.o: partition.cc partition.hh
-	$(call COMPILE_FILE,$<)
-
-.block.o: block.cc block.hh
-	$(call COMPILE_FILE,$<)
-
-# .$(notdir $(UTILS_GEN:.cpp=.o)): $(UTILS_GEN) $(UTILS_GEN:.cpp=.hh)
-# 	$(call COMPILE_FILE,$<)
-
-# .$(notdir $(UTILS_CV:.cpp=.o)): $(UTILS_CV) $(UTILS_CV:.cpp=.hh)
-# 	$(call COMPILE_FILE,$<)
 
 
 clean:

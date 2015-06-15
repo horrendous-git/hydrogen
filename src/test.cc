@@ -9,23 +9,23 @@
 using namespace std;
 using namespace Eigen;
 
+// create partition with 2 blocks {0}, {1..7}
 Partition* fill_b()
 {
-	Partition* B = new Partition();
-	
+	cout << "filling partition .. " << endl;
+	Partition* part = new Partition();
 	vector<int> v1;
 	v1.push_back(0);
-	B->add_block(v1);
+	part->add_block(v1);
 	vector<int> v2;
 	for(int ix=1;ix<=7;ix++)
 		v2.push_back(ix);
-	B->add_block(v2);
-	return B;
+	part->add_block(v2);
+	part->print();
+	return part;
 }
 
 int main() {
-	cout << "hello world" << endl;
-
 	Graph *g = new Graph("./graph1.txt");
 	cout << g->num_vertices << endl;
 	Certificate *cert = new Certificate();
@@ -42,7 +42,7 @@ int main() {
 	// coz L's values are assigned to B
 	// FYI: there are two blocks in L which
 	// will show up in valgrind
-	//delete(L);
+	// delete(L);
 	delete(B);
 	delete(cert);
 	delete(g);
