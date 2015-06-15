@@ -12,9 +12,12 @@ public:
 	void add_graph(Graph *g);
 	void generate_certificate();
 	// todo: make this private
-	Partition* split_update(Partition *B,
-					  int j,
-					  Block1 *T);
+	void split_update(Partition *B,
+					  Partition *S,
+					  Partition *U,
+					  int& j,
+					  int& N);
+	void refine(Partition* A);
 	// private:
 	Partition *L;
 };

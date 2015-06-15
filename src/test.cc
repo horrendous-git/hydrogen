@@ -10,7 +10,7 @@ using namespace std;
 using namespace Eigen;
 
 // create partition with 2 blocks {0}, {1..7}
-Partition* fill_b()
+Partition* fill_a()
 {
 	cout << "filling partition .. " << endl;
 	Partition* part = new Partition();
@@ -30,12 +30,13 @@ int main() {
 	cout << g->num_vertices << endl;
 	Certificate *cert = new Certificate();
 	cert->add_graph(g);
-	Partition *B;
-	int j=1;
-	// fill partition B
-	B = fill_b();
+	Partition *A;
+	// int j=1;
+	// fill partition A
+	A = fill_a();
 	// cert->split_update(B, j, B->at(0));
-	Partition *L = cert->split_update(B, j, B->at(0));
+	// cert->split_update(B, j, B->at(0));
+	cert->refine(A);
 
 	// todo: uncommenting this will lead to seg fault
 	// double free
@@ -43,7 +44,7 @@ int main() {
 	// FYI: there are two blocks in L which
 	// will show up in valgrind
 	// delete(L);
-	delete(B);
+	delete(A);
 	delete(cert);
 	delete(g);
 	

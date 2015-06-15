@@ -10,7 +10,34 @@ Certificate::Certificate()
 	
 }
 
-Partition* Certificate::split_update(Partition *B, int j, Block1 *T)
+void Certificate::refine(Partition *A) {
+	// B = A -- by copy
+	Partition* B = A.copy();
+	// S = B -- by copy
+	Partition* S = B.copy();
+	//U = vertex list, a vector whose elements are 0...n
+	int n = graph->num_vertices;
+	Vertices* V = new Vertices(n);
+	int N = B->size();
+
+	Partition* T;
+	int j;
+	while(N > 0) {
+		--N;
+		T = S->at(N);
+		if (T->is_proper_subset(U)) {
+			U->remove(T);
+			j = 0;
+			while(j < B->size() && B->size() < n) {
+				if (B->size() != 1)
+					split_update(B, S, U, j, N);
+			}
+		}
+	}
+	
+}
+
+void Certificate::split_update(Partition *B, Partition *S, Partition *U, int &j, int &N)
 {
 	// initialize L
 	L = new Partition(graph->num_vertices);
@@ -36,7 +63,7 @@ Partition* Certificate::split_update(Partition *B, int j, Block1 *T)
 	cout << "#non-empty blocks: " << m << endl;
 	// if there is one non-empty block, dont have to do anything
 	if (m<=1)
-		return L;
+		return;
 
 	// shift B by (m-1) to make some space in positions (j+1)..(|B|-1)
 	B->shift(j,m-1);
@@ -48,14 +75,14 @@ Partition* Certificate::split_update(Partition *B, int j, Block1 *T)
 			continue;
 
 		B->assign(j+k,  block);
-		//S->at(N+k) = L->at(h);
-		//U << L->at(h);
+		S->at(N+k) = L->at(h);
+		U.append(h);
 		k++;
 	}
 	B->print();
-	// j = j+m-1;
-	// N = N+m;
-	return L;
+	j = j+m-1;
+	N = N+m;
+	delete(L);
 }
 
 void Certificate::add_graph(Graph *g)
@@ -65,6 +92,4 @@ void Certificate::add_graph(Graph *g)
 
 Certificate::~Certificate()
 {
-	// check if L is valid
-	delete(L);
 }
